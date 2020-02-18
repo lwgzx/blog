@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}博客详情页{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h1>{{ entry.title }}</h1>
+                <p>
+                    <strong>{{ entry.author }}</strong>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{{ entry.created_time|date:'Y年m月d日' }}
+                    &nbsp;&nbsp;&nbsp;&nbsp;分类：
+                    {% for category in entry.category.all %}
+                        &nbsp;&nbsp;<a href="#">{{ category.name }}</a>
+                    {% endfor %}
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;标签：
+                    {% for tag in entry.tags.all %}
+                        &nbsp;&nbsp;<a href="#">{{ tag.name }}</a>
+                    {% endfor %}
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;浏览量：
+                    &nbsp;&nbsp;{{ entry.visiting }}
+
+                    {% if entry.img %}
+                        <img src="{{ entry.img.url }}" width="60%" height="270px"/>
+                    {% endif %}
+                <hr/>
+                <p>
+                    {{ entry.body }}
+                </p>
+                </p>
+            </div>
+            <div class="col-md-3">
+                {% include 'right_slide_bar.html' %}
+            </div>
+        </div>
+    </div>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;分类：
+    {% for category in entry.category.all %}
+        &nbsp;&nbsp;<a href="{% url 'blog:blog_category' category.id %}">{{ category.name }}</a>
+    {% endfor %}
+
+    &nbsp;&nbsp;&nbsp;&nbsp;标签：
+    {% for tag in entry.tags.all %}
+        &nbsp;&nbsp;<a href="{% url 'blog:blog_tag' tag.id %}">{{ tag.name }}</a>
+    {% endfor %}
+
+{% endblock %}
