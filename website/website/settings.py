@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'django.bin.website.blog.templatetags',
+    'blog.templatetags',
     'django.contrib.sitemaps',
     'django.contrib.sites',
     'django_comments',
