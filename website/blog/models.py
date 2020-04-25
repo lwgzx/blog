@@ -25,7 +25,7 @@ class Entry(models.Model):
     modified_time = models.DateTimeField('修改时间', auto_now=True)
 
 
-class User(models.Model):
+class Account(models.Model):
     user_name = models.CharField(default="", max_length=20)
     password = models.CharField(default="", max_length=20)
     email = models.CharField(default="", max_length=50)
