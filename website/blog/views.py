@@ -1,11 +1,9 @@
-
 from django.db.models import Q
 from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
-from django.bin.website.blog import models
-import markdown
+from blog import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -133,21 +131,7 @@ def index(request):
     page = request.GET.get('page', 1)
     entry_list, paginator = make_paginator(entries, page)
     page_data = pagination_data(paginator, page)
-
     return render(request, 'index.html', locals())
-
-
-def detail(request, blog_id):
-    entry = models.Entry.objects.get(id=blog_id)
-    md = markdown.Markdown(extensions=[
-        'markdown.extensions.extra',
-        'markdown.extensions.codehilite',
-        'markdown.extensions.toc',
-    ])
-    entry.body = md.convert(entry.body)
-    entry.toc = md.toc
-    entry.increase_visiting()
-    return render(request, 'detail.html', locals())
 
 
 def catagory(request, category_id):
